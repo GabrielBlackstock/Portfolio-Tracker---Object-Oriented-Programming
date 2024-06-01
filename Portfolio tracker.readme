@@ -1,0 +1,9 @@
+Portfolio tracker = This Python script is a simple portfolio tracker designed to help users track their portfolio's performance. It allows users to enter profitable and unprofitable trades, view the current portfolio balance, and see a summary of all transactions.
+
+## Features
+
+- Add Profitable Trades: Enter details of profitable trades, including the amount won and the asset involved.
+- Add Unprofitable Trades: Enter details of unprofitable trades, including the amount lost and the asset involved.
+- View Portfolio Balance: Check the current balance of the portfolio.
+- View Summary of Trades: Display a summary of all transactions, including dates, amounts, assets, and whether the trade was profitable or unprofitable.
+- User-Friendly Interface: Interact with the program through a simple command-line interface.
