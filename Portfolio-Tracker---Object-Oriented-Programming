@@ -1,45 +1,54 @@
 from datetime import datetime
 
-class PortfolioTracker: # Portfolio tracker class
+class PortfolioTracker: 
+    # PortfolioTracker class to manage trades and calculate portfolio balance
+
     def __init__(self, initial_balance):
         self.initial_balance = initial_balance 
-        self.transactions = [] # Set transactions as -
+        self.transactions = []  # Initialise an empty list to store transaction details
 
-    def add_profitable_trade(self, amount_won, asset): # parameters is the amount and asset
+    def add_profitable_trade(self, amount_won, asset):
+        # Method to add a profitable trade
         self.transactions.append({
-            'date': datetime.now(),
-            'amount': amount_won,
-            'asset': asset
+            'date': datetime.now(),  # Record the current date and time
+            'amount': amount_won,  # Record the amount won
+            'asset': asset  # Record the asset involved in the trade
         })
-        print(f" You won ${amount_won} on {asset}")
+        print(f"You won ${amount_won} on {asset}")
  
     def add_unprofitable_trade(self, amount_lost, asset):
+        # Method to add an unprofitable trade
         self.transactions.append({
-            'date': datetime.now(),
-            'amount': -amount_lost, 
-            'asset': asset
+            'date': datetime.now(),  # Record the current date and time
+            'amount': -amount_lost,  # Record the amount lost (negative value)
+            'asset': asset  # Record the asset involved in the trade
         })
-        print(f" You lost ${amount_lost} on {asset}")
+        print(f"You lost ${amount_lost} on {asset}")
 
     def current_balance(self):
+        # Calculate the current balance by summing up the initial balance 
+        # and all transaction amounts
         balance = self.initial_balance + sum(p['amount'] for p in self.transactions)
         return balance
 
     def summary(self):
-        print("n\Summary of transactions")
+        # Print a summary of all transactions and the current balance
+        print("\nSummary of transactions")
         for p in self.transactions:
-            date = p['date'].strftime("%Y-%m-%d %H:%M:S")
+            date = p['date'].strftime("%Y-%m-%d %H:%M:%S")  # Format the date
             amount = p['amount']
             asset = p['asset']
-            trade_type = "won" if amount > 0 else "lost"
+            trade_type = "won" if amount > 0 else "lost"  # Determine if the trade was profitable or not
             print(f"{date} - {trade_type} ${abs(amount)} on {asset}")
         print(f"Current balance: ${self.current_balance()}")
 
 def main():
-    tracker = PortfolioTracker(initial_balance = 0)
+    # Main function to interact with the user
+    tracker = PortfolioTracker(initial_balance=0)  # Create an instance of PortfolioTracker with an initial balance of 0
 
     while True:
-        print("\n Portfolio tracker")
+        # Display options to the user
+        print("\nPortfolio tracker")
         print("1. Enter a profitable trade")
         print("2. Enter an unprofitable trade")
         print("3. Print portfolio balance")
@@ -49,19 +58,28 @@ def main():
         choice = input("Choose an option from (1-5): ")
 
         if choice == '1':
-            amount_won = float(input("Enter profitable trade amount"))
-            asset = input("Enter the asset")
+            # Add a profitable trade
+            amount_won = float(input("Enter profitable trade amount: "))
+            asset = input("Enter the asset: ")
             tracker.add_profitable_trade(amount_won, asset)
         elif choice == '2':
-            amount_lost = float(input("Enter unprofitable trade amount"))
-            asset = input("Enter the asset")
+            # Add an unprofitable trade
+            amount_lost = float(input("Enter unprofitable trade amount: "))
+            asset = input("Enter the asset: ")
             tracker.add_unprofitable_trade(amount_lost, asset)
         elif choice == '3':
+            # Print the current portfolio balance
             print(f"Portfolio value is ${tracker.current_balance()}")
         elif choice == '4':
+            # Print a summary of all trades
             tracker.summary()
+        elif choice == '5':
+            # Exit the programme
+            print("Exiting the portfolio tracker.")
+            break
         else:
-            print("Invalid choice. Please choose a valid option")
+            print("Invalid choice. Please choose a valid option.")
 
 if __name__ == '__main__':
     main()
+
